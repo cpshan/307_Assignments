@@ -16,7 +16,7 @@ function removeOneCharacter (index) {
 function updateList(person) {
 	makePostCall(person).then(result => {
 		if (result)
-			setCharacters([...characters, person]);
+			setCharacters([...characters, result.data]);
 	});
 }
 async function fetchAll(){
