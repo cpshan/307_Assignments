@@ -11,10 +11,12 @@ async function removeOneCharacter (index) {
 	const id = characters[index]['id'];
 	try {
 		const response = await axios.delete('http://localhost:5000/users' + '/' + id);
-		const updated = characters.filter((character, i) => {
+		if (response) {
+			const updated = characters.filter((character, i) => {
 			return i !== index
-		})
-		setCharacters(updated);
+			})
+			setCharacters(updated);
+		}
 		return response
 	}
 	catch(error) {
