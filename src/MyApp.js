@@ -7,11 +7,20 @@ function MyApp() {
 	const [characters, setCharacters] = useState([]);
 	const axios = require('axios');
 
-function removeOneCharacter (index) {
-	const updated = characters.filter((character, i) => {
-		return i !== index
-	})
-	setCharacters(updated);
+async function removeOneCharacter (index) {
+	const id = characters[index]['id'];
+	try {
+		const response = await axios.delete('http://localhost:5000/users' + '/' + id);
+		const updated = characters.filter((character, i) => {
+			return i !== index
+		})
+		setCharacters(updated);
+		return response
+	}
+	catch(error) {
+		console.log(error);
+		return false;
+	}
 }
 function updateList(person) {
 	makePostCall(person).then(result => {
